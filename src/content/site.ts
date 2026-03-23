@@ -1,4 +1,8 @@
+import { resolvedStaticBasePath } from "@/lib/staticExportBasePath";
+
 /** Inhalte aus dem Website-Inventar — strukturiert für die Marcatis Industrial Homepage. */
+
+const homeHash = (id: string) => `${resolvedStaticBasePath()}/#${id}`;
 
 export const company = {
   legalName: "Marcatis Laserbearbeitung GmbH",
@@ -22,9 +26,9 @@ export const company = {
 
 /** Top-Navigation — Anker entsprechen Section-IDs auf der Startseite. */
 export const nav = [
-  { href: "/#solutions", label: "Solutions" },
-  { href: "/#capabilities", label: "Capabilities" },
-  { href: "/#contact", label: "Kontakt" },
+  { href: homeHash("solutions"), label: "Solutions" },
+  { href: homeHash("capabilities"), label: "Capabilities" },
+  { href: homeHash("contact"), label: "Kontakt" },
 ] as const;
 
 /** KPI-Block — Zahlen aus Kernbotschaften / FAQ (keine erfundenen Metriken). */

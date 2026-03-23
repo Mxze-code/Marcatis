@@ -14,8 +14,9 @@ export function IndustrialHeader() {
   const scaleItems = useMemo(() => {
     return nav
       .map((item, idx) => {
+        const hashIdx = item.href.indexOf("#");
         const sectionId =
-          item.href.startsWith("/#") ? item.href.slice(2) : undefined;
+          hashIdx >= 0 ? item.href.slice(hashIdx + 1) : undefined;
         return {
           ...item,
           sectionId,
