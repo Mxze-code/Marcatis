@@ -24,14 +24,16 @@ export function PublicFillImage({ src, alt, className, sizes, priority }: Props)
       loading={priority ? "eager" : "lazy"}
       fetchPriority={priority ? "high" : undefined}
       style={{
+        // "next/image fill" compatibility:
+        // - `inset: 0` instead of individual sides
+        // - explicit block rendering
+        // - default `object-fit: cover` (all current assets use object-cover)
         position: "absolute",
-        height: "100%",
+        inset: 0,
+        display: "block",
         width: "100%",
-        left: 0,
-        top: 0,
-        right: 0,
-        bottom: 0,
-        color: "transparent",
+        height: "100%",
+        objectFit: "cover",
       }}
     />
   );
