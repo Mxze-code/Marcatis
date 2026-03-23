@@ -1,8 +1,7 @@
-import { resolvedStaticBasePath } from "@/lib/staticExportBasePath";
-
 /** Inhalte aus dem Website-Inventar — strukturiert für die Marcatis Industrial Homepage. */
 
-const homeHash = (id: string) => `${resolvedStaticBasePath()}/#${id}`;
+/** Root-relative hash only — Next.js `Link` wendet `basePath` selbst an (kein doppeltes /Repo/Repo/). */
+const homeHash = (id: string) => `/#${id}`;
 
 export const company = {
   legalName: "Marcatis Laserbearbeitung GmbH",
@@ -24,6 +23,18 @@ export const company = {
   registerNumber: "HRB 14376",
 } as const;
 
+/** Google Maps: einheitliche Zieladresse für Embed + Routenplaner (Marker über Adresssuche). */
+const MAP_DESTINATION = "Zeppelinstraße 6, 63741 Aschaffenburg, Deutschland";
+
+export const companyMap = {
+  embedSrc:
+    "https://www.google.com/maps?q=" +
+    encodeURIComponent(MAP_DESTINATION) +
+    "&hl=de&z=17&output=embed",
+  directionsUrl:
+    "https://www.google.com/maps/dir/?api=1&destination=" + encodeURIComponent(MAP_DESTINATION),
+} as const;
+
 /** Top-Navigation — Anker entsprechen Section-IDs auf der Startseite. */
 export const nav = [
   { href: homeHash("solutions"), label: "Solutions" },
@@ -31,23 +42,11 @@ export const nav = [
   { href: homeHash("contact"), label: "Kontakt" },
 ] as const;
 
-/** KPI-Block — Zahlen aus Kernbotschaften / FAQ (keine erfundenen Metriken). */
-export const homeStats = [
-  {
-    value: "10+",
-    title: "JAHRE ERFAHRUNG",
-    detail: "Leidenschaft für Lasertechnik — moderne Technik und bewährte Prozesse.",
-  },
-  {
-    value: "3",
-    title: "KERNVERFAHREN",
-    detail: "Beschriftung · Feinschneiden · 3D-Gravur — klar definiert und skalierbar.",
-  },
-  {
-    value: "µm",
-    title: "PRÄZISION",
-    detail: "Laserfeinschneiden im Mikrometerbereich — gratfreie Kanten, enge Toleranzen.",
-  },
+/** Capabilities — kompakte Kennzahlen (ohne lange Fließtexte). */
+export const capabilitiesKpis = [
+  { value: "10+", label: "Jahre Lasertechnik" },
+  { value: "3", label: "Kernverfahren" },
+  { value: "µm", label: "Feinschnitt-Toleranzen" },
 ] as const;
 
 export const homeHero = {
@@ -92,57 +91,57 @@ export const coreServicesSection = {
 } as const;
 
 export const whyMarcatis = {
-  headline: "Capabilities, die in Serie tragen",
+  headline: "Prozesssicherheit von Muster bis Serie",
   intro:
-    "Weniger operative Last, mehr Prozesssicherheit: Wir übersetzen Anforderungen in wiederholbare Laserprozesse — von Muster bis Serie, mit klaren Schnittstellen.",
-  pillars: [
-    {
-      title: "Präzision",
-      text: "Mikrometer statt Bauchgefühl — messbare Ergebnisse für anspruchsvolle Geometrien und Kennzeichnung.",
-    },
-    {
-      title: "Verlässlichkeit",
-      text: "Termine, Qualität und Kommunikation — damit Ihre Linie und Ihre Kunden ruhig schlafen können.",
-    },
-    {
-      title: "Industrielle Relevanz",
-      text: "MES/ERP-Schnittstellen, Serienfertigung, Medizintechnik & Automobil — Erfahrung statt Experiment.",
-    },
-    {
-      title: "Wirtschaftlichkeit",
-      text: "ACSYS-Anlagen, stabile Prozesse, attraktive Konditionen — ohne versteckte Komplexität.",
-    },
+    "Wir übersetzen Anforderungen in wiederholbare Laserprozesse — mit klaren Schnittstellen, messbarer Qualität und belastbarer Kommunikation.",
+  highlights: [
+    "Präzision & Verlässlichkeit — Mikrometer-Toleranzen, feste Termine, transparente Abstimmung.",
+    "Industrie & Wirtschaftlichkeit — MES/ERP, Medizintechnik & Automotive; ACSYS-Anlagen und stabile Parameter.",
   ],
 } as const;
 
+/** Sektion „Kundenstimmen“ — Überschrift; optionaler Kurztext (nicht die Zitate selbst). */
 export const trustSection = {
-  headline: "Referenzen & Praxis",
-  intro:
-    "Langfristige Partnerschaften entstehen aus Klarheit, Qualität und belastbarer Kommunikation — über Material, Logistik und Betreuung hinweg.",
+  headline: "Kundenstimmen",
+  intro: "",
 } as const;
 
+/**
+ * Kundenstimmen 1:1 wie auf https://www.marcatis.de/ (Absätze über \n\n).
+ * Inhalt nicht kürzen oder umschreiben — nur Darstellung im UI anpassbar.
+ */
 export const testimonials = [
   {
-    quote:
-      "Lob für die lokale Partnerschaft, die Beschriftung eines iPads, faire Preise bei Lasergravur und die kompetente Beratung.",
+    quote: `Wir haben einen professionellen und lokalen Partner für die Laserbeschriftung gesucht, unsere örtlichen Gruppenleiter sollten alle mit i-Pads ausgestattet werden. So kamen wir mit der Firma Marcatis in Kontakt. Die Beschriftung ist perfekt geworden. Auch in diesem Jahr haben wir wieder auf Marcatis zurückgegriffen.
+
+Für unseren Kreiswettbewerb wollten wir nicht die üblichen Preise an die Teilnehmer verteilen, wir wollten etwas Neues.
+
+Auch hier, super Beratung, super Ideen und eine perfekte Lasergravur. Danke für diese gute Zusammenarbeit. Wir kommen immer wieder auf Sie zurück.`,
     name: "Peter Kern",
-    role: "Kreisleiter Rotkreuz Jugendarbeit",
+    role: "Kreisleiter, Rotkreuz Jugendarbeit",
   },
   {
-    quote:
-      "Mehrjährige Zusammenarbeit mit hoher Qualität, Liefertreue, Know-how und Flexibilität.",
+    quote: `Seit dem wir die Firma Beeftec gegründet haben ist die Marcatis GmbH unser Partner für Laserbeschriftungen und Lasergravuren. In der bereits mehrjährigen Zusammenarbeit erfreuen wir uns stets an einer herausragenden Qualität und Liefertreue. Darüber hinaus lassen uns
+
+Know-How, Flexibilität sowie eine kundenorientierte Ausrichtung dieses Unternehmen jederzeit weiterempfehlen.`,
     name: "Fritz Kiener",
     role: "Geschäftsführer, Beeftec Grillgeräte",
   },
   {
-    quote:
-      "Enge Zusammenarbeit, kurze Kommunikationswege, Transparenz — Qualität bei Material, Preis, Logistik, Kundenbetreuung und Reklamationen.",
+    quote: `Seit Beginn unserer Geschäftsbeziehungen können wir guten Gewissens behaupten das die Zusammenarbeit mit Ihnen und Ihrem Team der Marcatis Laserbearbeitung GmbH sich zu einem eng vernetzen Arbeitsumfeld mit kurzen Kommunikationswegen und absoluter Transparenz entwickelt hat.
+
+Die von Ihnen gebotene Qualität in Bezug auf Material/Preis/Logistik/Kundenbetreuung/Reklamationen wird nicht nur angeboten sondern auch 100% geliefert.
+
+Diese Parameter sind ausschlaggebend für eine gute Zusammenarbeit. Deshalb werden Sie für uns auch in Zukunft weiterhin der Ansprechpartner für diese Fertigungstechniken sein. Vielen Dank für die bisherige Zusammenarbeit und auf weitere Projekte.`,
     name: "Martin Lehr",
     role: "Fertigungsleitung, VaW GmbH",
   },
   {
-    quote:
-      "Vertrauen, Klarheit, Zuverlässigkeit, fachliche Qualität — mit klarer Weiterempfehlung.",
+    quote: `Von Anfang an war die Zusammenarbeit von Vertrauen, Klarheit und einem echten Miteinander geprägt. Sehr zuverlässiges Team, fachlich top, menschlich mit viel Herz dabei.
+
+Ob bei Material, Preisgestaltung, Logistik oder im persönlichen Austausch: Wir spüren immer wieder bei jedem Projekt, dass Qualität hier nicht nur ein Anspruch, sondern zu 100% gelebter Alltag ist.
+
+Ganz klare Weiterempfehlung.`,
     name: "Alexander Klotz",
     role: "Inhaber, Orange Production",
   },

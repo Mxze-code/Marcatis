@@ -3,6 +3,7 @@ import { ContactForm } from "@/components/ContactForm";
 import { AnimatedContent } from "@/components/animations/AnimatedContent";
 import { TextBlockReveal } from "@/components/animations/TextBlockReveal";
 import { WhisperText } from "@/components/animations/WhisperText";
+import { MarcatisLocationMap } from "@/components/industrial/MarcatisLocationMap";
 import { company } from "@/content/site";
 
 export const metadata: Metadata = {
@@ -12,7 +13,7 @@ export const metadata: Metadata = {
 
 export default function KontaktPage() {
   return (
-    <div className="border-t border-white/10 bg-black pt-20">
+    <div className="border-t border-white/10 bg-black">
       <section className="border-b border-white/10 bg-black">
         <div className="mx-auto max-w-6xl px-6 py-20 sm:py-28">
           <TextBlockReveal
@@ -79,6 +80,8 @@ export default function KontaktPage() {
           </AnimatedContent>
         </div>
       </div>
+
+      <MarcatisLocationMap insetClassName="mx-auto w-full max-w-6xl px-6" />
     </div>
   );
 }

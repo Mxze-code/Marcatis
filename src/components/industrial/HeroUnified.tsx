@@ -7,7 +7,7 @@ import heroLaser from "@/assets/makatis-hero-laser.png";
  */
 export function HeroUnified() {
   return (
-    <section id="hero" className="relative min-h-[100svh] overflow-hidden bg-black">
+    <section id="hero" className="relative min-h-hero-viewport overflow-hidden bg-black">
       <div className="absolute inset-0 z-0">
         <Image
           src={heroLaser}
@@ -29,7 +29,7 @@ export function HeroUnified() {
         aria-hidden
       />
 
-      <div className="relative z-10 mx-auto flex min-h-[100svh] max-w-[1600px] flex-col justify-end px-5 pb-14 pt-28 md:px-10 md:pb-20 md:pt-36">
+      <div className="relative z-10 mx-auto flex min-h-hero-viewport max-w-[1600px] flex-col justify-end px-5 pb-14 pt-28 md:px-10 md:pb-20 md:pt-36">
         {/* Safari-stabiles Zwei-Spalten-Layout (Flex mit Min-Width statt Grid-Squeeze) */}
         <div className="flex flex-1 flex-col items-start gap-y-10">
           {/* Text: links mit stabiler Lesebreite */}

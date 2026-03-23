@@ -5,6 +5,14 @@
   --m-red: #dc2626;
   --ink: #000000;
   --paper: #f4f4f5;
+  /* Fixed header — Abstand für main + Hero-Höhe (s. IndustrialHeader py + Logo) */
+  --site-header-h: 4.75rem;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --site-header-h: 5.25rem;
+  }
 }
 
 @theme inline {
@@ -18,6 +26,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: var(--site-header-h);
 }
 
 body {
@@ -87,4 +96,46 @@ body {
   .btn-industrial:hover {
     transform: none;
   }
+}
+
+/* svh-Fallback: Ohne svh-Unterstützung wäre min(...,svh) ungültig → Höhe 0 bei fill-Images. */
+.min-h-hero-viewport {
+  min-height: 100vh;
+  min-height: 100svh;
+}
+
+/*
+ * Hero-Höhe unter festem Header — nur ab md (nicht als `md:min-h-*` in Tailwind,
+ * sondern echte Media-Query, sonst kollabiert der Hero: beide Layer sind absolute).
+ */
+@media (min-width: 768px) {
+  .hero-min-h-desktop {
+    min-height: calc(100vh - var(--site-header-h));
+    min-height: calc(100svh - var(--site-header-h));
+  }
+}
+
+.min-h-85-viewport {
+  min-height: 85vh;
+  min-height: 85svh;
+}
+
+.min-h-88-viewport {
+  min-height: 88vh;
+  min-height: 88svh;
+}
+
+.min-h-90-viewport {
+  min-height: 90vh;
+  min-height: 90svh;
+}
+
+.min-h-92-viewport {
+  min-height: 92vh;
+  min-height: 92svh;
+}
+
+.h-capabilities-wide-photo {
+  height: min(58vh, 760px);
+  height: min(58svh, 760px);
 }

@@ -1,45 +1,69 @@
-import Image from "next/image";
+import { PublicFillImage } from "@/components/PublicFillImage";
+import { HeroHeadlineReveal } from "@/components/industrial/HeroHeadlineReveal";
 import { marcatisPhotos } from "@/content/marcatisPhotos";
+
+type HeroWithOptionalMobile = (typeof marcatisPhotos.hero) & { mobileSrc?: string };
 
 /**
  * Dominantes Hero: echtes Marcatis-Laserbild (Photos/image-laser.png), premium & kontrastreich.
+ * Mobile: eigener Bildstreifen mit mehr Höhe, Fokus auf Laserkopf/Schnitt; Headline darunter auf Schwarz
+ * (kein Überdecken des Key-Visuals). Desktop: klassische Vollfläche mit Overlay unten.
  */
 export function HeroUnifiedStable() {
-  const { src, alt } = marcatisPhotos.hero;
+  const hero = marcatisPhotos.hero as HeroWithOptionalMobile;
+  const mobileSrc = hero.mobileSrc;
+  const useSplitAssets = Boolean(mobileSrc && mobileSrc !== hero.src);
 
   return (
-    <section
-      id="hero"
-      className="relative min-h-[100svh] overflow-hidden bg-black"
-    >
-      <div className="absolute inset-0 z-0" aria-hidden>
-        <Image
-          src={src}
-          alt={alt}
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover object-center"
-          quality={92}
+    <section id="hero" className="relative overflow-hidden bg-black hero-min-h-desktop">
+      <div className="relative z-0 h-[min(68svh,620px)] w-full shrink-0 overflow-hidden md:absolute md:inset-0 md:h-auto hero-min-h-desktop md:shrink">
+        {useSplitAssets ? (
+          <>
+            <PublicFillImage
+              src={mobileSrc!}
+              alt=""
+              priority
+              sizes="100vw"
+              className="object-cover object-center md:hidden"
+            />
+            <PublicFillImage
+              src={hero.src}
+              alt={hero.alt}
+              priority
+              sizes="100vw"
+              className={`hidden md:block ${hero.imageObjectClassDesktopOnly}`}
+            />
+          </>
+        ) : (
+          <PublicFillImage
+            src={hero.src}
+            alt={hero.alt}
+            priority
+            sizes="100vw"
+            className={hero.imageObjectClass}
+          />
+        )}
+
+        {/* Mobile: stärkerer Übergang in den Textblock; Desktop: dezentes Editorial-Overlay */}
+        <div
+          className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/25 via-transparent to-black md:bg-gradient-to-t md:from-black/50 md:via-transparent md:to-black/15"
+          aria-hidden
         />
-        {/* Sehr leicht: Schärfe beibehalten, nur minimal Lesbarkeit unten */}
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-black/15" />
+        <div
+          className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-black via-black/70 to-transparent md:hidden"
+          aria-hidden
+        />
       </div>
 
-      <div className="relative z-10 mx-auto flex min-h-[100svh] w-full flex-col justify-end px-5 pb-14 sm:px-8 md:px-10 md:pb-20 lg:px-14 lg:pb-24 xl:px-16 2xl:px-24">
-        <div className="grid items-end gap-10 md:grid-cols-12">
-          <div className="md:col-span-5 lg:col-span-5 xl:max-w-[42rem]">
-            <h1 className="font-[family-name:var(--font-display)] text-[2.6rem] leading-[0.84] tracking-[-0.075em] text-white drop-shadow-[0_22px_85px_rgba(0,0,0,0.85)] sm:text-[3.5rem] md:text-[5.75rem] lg:text-[7.9rem] xl:text-[9.2rem]">
-              PRÄZISION,
-              <br />
-              <span className="text-white/95">
-                <span className="block whitespace-nowrap">DIE SICHTBAR</span>
-                <span className="block whitespace-nowrap">BLEIBT.</span>
-              </span>
-            </h1>
-          </div>
+      <div className="relative z-10 border-t border-white/10 bg-black px-5 pb-14 pt-11 sm:px-8 md:absolute md:inset-0 md:flex hero-min-h-desktop md:border-0 md:bg-transparent md:px-10 md:pb-20 md:pt-0 lg:px-14 lg:pb-24 xl:px-16 2xl:px-24">
+        <div className="flex w-full flex-col justify-end md:min-h-0 md:flex-1">
+          <div className="grid items-end gap-10 md:grid-cols-12">
+            <div className="md:col-span-5 lg:col-span-5 xl:max-w-[42rem]">
+              <HeroHeadlineReveal />
+            </div>
 
-          <div className="hidden md:block md:col-span-7 lg:col-span-7" />
+            <div className="hidden md:block md:col-span-7 lg:col-span-7" />
+          </div>
         </div>
       </div>
     </section>

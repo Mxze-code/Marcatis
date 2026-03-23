@@ -48,7 +48,7 @@ export default function RootLayout({
     <html lang="de" className={`${inter.variable} ${space.variable} ${geistMono.variable} h-full`}>
       <body className="min-h-full flex flex-col bg-black text-zinc-100 antialiased">
         <IndustrialHeader />
-        <main className="flex-1">{children}</main>
+        <main className="flex-1 pt-[var(--site-header-h)]">{children}</main>
         <SiteFooter />
       </body>
     </html>

@@ -71,7 +71,7 @@ export function IndustrialHeader() {
   const navColsTemplate = `repeat(${scaleItems.length}, minmax(0, 1fr))`;
 
   return (
-    <header className="fixed top-0 z-[100] w-full border-b-2 border-m-red/50 bg-black/80 backdrop-blur-md">
+    <header className="fixed top-0 z-[500] w-full border-b-2 border-m-red/50 bg-zinc-950/95 backdrop-blur-md">
       <div className="mx-auto flex w-full items-center justify-between gap-6 px-5 py-3 sm:px-8 md:px-10 md:py-4 lg:px-14 xl:px-16 2xl:px-24">
         <Link
           href="/"

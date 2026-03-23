@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { PublicFillImage } from "@/components/PublicFillImage";
 import { coreServices, coreServicesSection } from "@/content/site";
 import { marcatisPhotos } from "@/content/marcatisPhotos";
 import { sectionInset } from "@/components/industrial/sectionInset";
@@ -30,12 +30,11 @@ export function SectionLeistungen() {
             const photo = marcatisPhotos.procedures[s.id as ProcedureId];
             return (
               <article key={s.id} id={s.id} className="flex min-h-0 flex-col bg-black">
-                <div className="relative aspect-[5/3] w-full shrink-0 overflow-hidden bg-zinc-900">
-                  <Image
+                <div className="relative aspect-[4/5] w-full shrink-0 overflow-hidden bg-zinc-900 sm:aspect-[5/4] md:aspect-[5/3]">
+                  <PublicFillImage
                     src={photo.src}
                     alt={photo.alt}
-                    fill
-                    className="object-cover object-center"
+                    className={photo.imageObjectClass}
                     sizes="(max-width: 768px) 100vw, 33vw"
                   />
                 </div>

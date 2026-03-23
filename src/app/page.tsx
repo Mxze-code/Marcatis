@@ -1,8 +1,7 @@
 import { HeroUnifiedStable } from "@/components/industrial/HeroUnifiedStable";
+import { SectionCapabilities } from "@/components/industrial/SectionCapabilities";
 import { SectionContact } from "@/components/industrial/SectionContact";
 import { SectionLeistungen } from "@/components/industrial/SectionLeistungen";
-import { SectionTrust } from "@/components/industrial/SectionTrust";
-import { SectionWarum } from "@/components/industrial/SectionWarum";
 
 export default function HomePage() {
   return (
@@ -10,8 +9,7 @@ export default function HomePage() {
       <HeroUnifiedStable />
       <SectionLeistungen />
       <section id="capabilities" className="w-full border-t border-white/10">
-        <SectionWarum />
-        <SectionTrust />
+        <SectionCapabilities />
       </section>
       <SectionContact />
     </>
